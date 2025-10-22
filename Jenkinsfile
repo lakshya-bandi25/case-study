@@ -1,52 +1,38 @@
 pipeline {
     agent any
-
-    environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
-        DOCKER_IMAGE = 'your-dockerhub-username/password-generator'
-    }
-
     stages {
-        stage('Checkout Code') {
+        stage("Build Docker image") {
             steps {
-                git 'https://github.com/yourusername/password-generator.git'
+                echo "Build Docker image"
+                bat "docker build -t temperature-converter:v1 ."
             }
         }
-
-        stage('Build Docker Image') {
+        stage("Docker Login") {
             steps {
-                script {
-                    sh 'docker build -t $DOCKER_IMAGE:latest .'
-                }
+                bat "docker login -u laxmiprasanna11 -p laxmiprasanna@11"
             }
         }
-
-        stage('Push to DockerHub') {
+        stage("push Docker image to docker hub") {
             steps {
-                script {
-                    withDockerRegistry([credentialsId: 'dockerhub-credentials', url: '']) {
-                        sh 'docker push $DOCKER_IMAGE:latest'
-                    }
-                }
+                echo "push Docker image to docker hub"
+                bat "docker tag temperature-converter:v1 laxmiprasanna11/case_study:t2"
+                bat "docker push laxmiprasanna11/case_study:t2"
             }
         }
-
-        stage('Deploy to Kubernetes') {
+        stage("Deploy to kubernetes") {
             steps {
-                script {
-                    sh 'kubectl apply -f k8s/deployment.yaml'
-                    sh 'kubectl apply -f k8s/service.yaml'
-                }
+                echo "Deploy to kubernetes"
+                bat "kubectl apply -f deployment.yaml --validate=false"
+                bat "kubectl apply -f service.yaml"
             }
         }
     }
-
     post {
         success {
-            echo '✅ Deployment successful!'
+            echo "Pipeline executed successfully"
         }
         failure {
-            echo '❌ Pipeline failed.'
+            echo "pipeline failed. Please check the logs"
         }
     }
 }
