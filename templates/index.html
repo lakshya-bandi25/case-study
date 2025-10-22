@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Password Generator</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; background-color: #f7f7f7; }
+    h1 { color: #333; }
+    form { background: #fff; padding: 20px; border-radius: 10px; width: 300px; }
+    input[type="number"] { width: 100%; }
+    button { background-color: #007bff; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; }
+    button:hover { background-color: #0056b3; }
+    .password { background: #eaeaea; padding: 10px; border-radius: 5px; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Password Generator</h1>
+  <form method="POST">
+    <label>Password Length:</label><br>
+    <input type="number" name="length" value="12" min="4" max="32"><br><br>
+    <label><input type="checkbox" name="upper" checked> Uppercase</label><br>
+    <label><input type="checkbox" name="lower" checked> Lowercase</label><br>
+    <label><input type="checkbox" name="digits" checked> Digits</label><br>
+    <label><input type="checkbox" name="punct"> Symbols</label><br><br>
+    <button type="submit">Generate</button>
+  </form>
+  {% if password %}
+  <div class="password">
+    <strong>Generated Password:</strong><br>
+    {{ password }}
+  </div>
+  {% endif %}
+  <br>
+  <a href="/history">View History</a>
+</body>
+</html>
