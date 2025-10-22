@@ -2,19 +2,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: temperature-converter-deployment
+  name: password-generator-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: temperature-converter
+      app: password-generator
   template:
     metadata:
       labels:
-        app: temperature-converter
+        app: password-generator
     spec:
       containers:
-        - name: temperature-converter
-          image: laxmiprasanna11/case_study:t2 # use your Docker Hub image
+        - name: password-generator
+          image: lakshyabandi25/case_study:t2 # use your Docker Hub image
           ports:
             - containerPort: 5000
