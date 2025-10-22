@@ -4,19 +4,19 @@ pipeline {
         stage("Build Docker image") {
             steps {
                 echo "Build Docker image"
-                bat "docker build -t temperature-converter:v1 ."
+                bat "docker build -t  password-generator:v1 ."
             }
         }
         stage("Docker Login") {
             steps {
-                bat "docker login -u laxmiprasanna11 -p laxmiprasanna@11"
+                bat "docker login -u lakshyabandi25 -p Lakshya.bandi"
             }
         }
         stage("push Docker image to docker hub") {
             steps {
                 echo "push Docker image to docker hub"
-                bat "docker tag temperature-converter:v1 laxmiprasanna11/case_study:t2"
-                bat "docker push laxmiprasanna11/case_study:t2"
+                bat "docker tag temperature-converter:v1 lakshyabandi25/case_study:t2"
+                bat "docker push lakshyabandi25/case_study:t2"
             }
         }
         stage("Deploy to kubernetes") {
