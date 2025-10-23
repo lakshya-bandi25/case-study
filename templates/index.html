@@ -1,85 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>Password Generator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f3f4f6;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        h1 {
-            color: #333;
-            margin-top: 40px;
-        }
-        .container {
-            background-color: #fff;
-            padding: 25px 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            margin-top: 20px;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-        label {
-            margin-top: 10px;
-        }
-        input[type="number"] {
-            width: 80px;
-            padding: 5px;
-            margin-top: 5px;
-        }
-        input[type="checkbox"] {
-            margin-right: 8px;
-        }
-        button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 15px;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .result {
-            margin-top: 20px;
-            font-weight: bold;
-            color: #222;
-            background-color: #f0f0f0;
-            padding: 10px;
-            border-radius: 5px;
-            word-wrap: break-word;
-        }
-    </style>
 </head>
 <body>
     <h1>Password Generator</h1>
-    <div class="container">
-        <form action="/generate" method="POST">
-            <label for="length">Password Length:</label>
-            <input type="number" name="length" id="length" value="12" min="4" max="50" required>
+    <form method="POST" action="/generate">
+        <input type="number" name="length" placeholder="Password length" required>
+        <br>
+        <label><input type="checkbox" name="uppercase"> Uppercase</label>
+        <label><input type="checkbox" name="lowercase"> Lowercase</label>
+        <label><input type="checkbox" name="digits"> Digits</label>
+        <label><input type="checkbox" name="symbols"> Symbols</label>
+        <br><br>
+        <button type="submit">Generate</button>
+    </form>
 
-            <label><input type="checkbox" name="uppercase" checked> Uppercase</label>
-            <label><input type="checkbox" name="lowercase" checked> Lowercase</label>
-            <label><input type="checkbox" name="digits" checked> Digits</label>
-            <label><input type="checkbox" name="symbols"> Symbols</label>
-
-            <button type="submit">Generate</button>
-        </form>
-
-        {% if result %}
-        <div class="result">{{ result }}</div>
-        {% endif %}
-    </div>
+    {% if result %}
+        <p>{{ result }}</p>
+    {% endif %}
 </body>
 </html>
