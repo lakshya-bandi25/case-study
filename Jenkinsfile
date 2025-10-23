@@ -15,7 +15,7 @@ pipeline {
         stage("push Docker image to docker hub") {
             steps {
                 echo "push Docker image to docker hub"
-                bat "docker tag temperature-converter:v1 lakshyabandi25/case_study:t2"
+                bat "docker tag password-generator:v1 lakshyabandi25/case_study:t2"
                 bat "docker push lakshyabandi25/case_study:t2"
             }
         }
